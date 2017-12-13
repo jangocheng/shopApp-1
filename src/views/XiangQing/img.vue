@@ -56,6 +56,17 @@
   				<li><span class="border">保税区</span></li>
   			</ul>
   		</div>
+  		<ul class="ul1" style="margin-top: 20px;">
+					<li>
+						<router-link to="/XiangQing/describe"><p>商品详情</p></router-link>
+					</li>
+					<li>
+						<router-link to="/XiangQing/pingjia"><p>评价(156)</p></router-link>
+					</li>
+					<li>
+						<router-link to="/XiangQing/params"><p>规格参数</p></router-link>
+					</li>
+			</ul>
   </div>
 </template>
 
@@ -85,7 +96,7 @@ export default {
   },
   methods:{
   	back(){
-  		this.$router.push('/shop')
+  		this.$router.push('/index/shop')
   	}
   }
 }
@@ -96,25 +107,29 @@ export default {
 	margin: 0;
 	padding: 0;
 }
-  .banner{
-  	position: relative;
-  	background: white;
-  }
-	.swiper-slide{
-		width: 100%;
-		height: 260px;
-	}
-	.banner img{
-		width: 100%;
-		height: 100%;
-	}
-	#back{
-		 position: absolute;
-		 top: 3%;
-		 left: 5%;
-		 color: red;
-		 z-index: 100;
-	}
+.img{
+	width: 100%;
+	height: 560px;
+}
+.banner{
+	height: 260px;
+  position: relative;
+  background: white;
+}
+.swiper-slide{
+	width: 100%;
+	height: 260px;
+}
+.banner img{
+	width: 100%;
+}
+#back{
+	 position: absolute;
+	 top: 3%;
+	 left: 5%;
+	 color: red;
+	 z-index: 100;
+}
 .ul{
 	height: 50px;
 	background: #F9F9F9;
@@ -150,7 +165,6 @@ export default {
 	padding: 0 12px;
 	background: white;
 }
-
 #ul li{
 	list-style: none;
 	display: flex;
@@ -194,5 +208,25 @@ export default {
 	color: #F38873;
 	padding: 2px 8px;
 	border-radius: 4px 4px 4px 4px ;
+}
+.ul1{
+	display: flex;
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	background: white;
+	border-bottom: 1px solid #DDDDDD;
+}
+.ul1 li{
+	width: 33.3%;
+	list-style: none;
+	text-align: center;
+}
+.ul1 li p{
+	color: #666666;
+}
+.ul1 li:hover{
+	color: #CE3232;
+	border-bottom: 2px solid #CA3232;
 }
 </style>

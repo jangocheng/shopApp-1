@@ -1,10 +1,5 @@
 <template>
-  <div class="describe" style="margin-top: 20px;">
-		<ul class="ul1">
-			<li style="border-bottom: 2px solid #CA3232;color: #CA3232;">商品详情</li>
-			<li @click="pingjia()">评价(156)</li>
-			<li>规格参数</li>
-		</ul>
+  <div class="describe">
 		<img src="../../assets/XiangQing/Xbanner.png" class="img"/>
 		
 		<ul class="ul2">
@@ -86,24 +81,6 @@
 			</p>
 		</div>
 		<img src="../../assets/XiangQing/icon6.png" class="img3"/>
-		<div id="footer">
-			<ul>
-				<li>
-					<p><img src="../../assets/XiangQing/icon9.png"/></p>
-					<p class="bottom1">购物车</p>
-				</li>
-				<li>
-					<p><img src="../../assets/XiangQing/icon8.png"/></p>
-					<p class="bottom1">收藏</p>
-				</li>
-				<li @click="push()">
-					<p class="bottom2">加入购物车</p>
-				</li>
-				<li>
-					<p class="bottom2">立即购买</p>
-				</li>
-			</ul>
-		</div>
   </div>
 </template>
 
@@ -114,14 +91,6 @@ export default {
     return {
      
     }
-  },
-  methods:{
-  	push(){
-  		this.$router.push('shopCar1')
-  	},
-  	pingjia(){
-  		this.$router.push('/pingjia')
-  	}
   }
 }
 </script>
@@ -134,19 +103,6 @@ export default {
 .describe{
 	width: 100%;
 	background: white;
-}
-.ul1{
-	display: flex;
-	width: 100%;
-	height: 40px;
-	line-height: 40px;
-	border-bottom: 1px solid #DDDDDD;
-}
-.ul1 li{
-	width: 33.3%;
-	list-style: none;
-	text-align: center;
-	color: #666666;
 }
 .img{
 	margin-top: 6px;
@@ -226,51 +182,9 @@ export default {
 .img3{
 	width: 100%;
 	height: 480px;
-	margin-bottom: 60px;
 }
 .big{
 	font-size: 16px;
 }
-#footer{
-	width: 100%;
-	height: 60px;
-	background: white;
-	position: fixed;
-	bottom: 0;
-}
-#footer ul{
-	width: 100%;
-	display: flex;
-}
-#footer ul li{
-	text-align: center;
-	height: 60px;
-	list-style: none;
-}
-#footer ul li:nth-child(1){
-	padding-top: 8px;
-	width: 15%;
-	border-right: 1px solid #DDDDDD;
-}
-#footer ul li:nth-child(2){
-	padding-top: 8px;
-	width: 15%;
-}
-#footer ul li:nth-child(3){
-	width: 35%;
-	background: #ff6060;
-}
-#footer ul li:nth-child(4){
-	width: 35%;
-	background: #CA3232;
-}
-.bottom1{
-	margin-top: -6px;
-	color: gray;
-}
-.bottom2{
-	color: white;
-	line-height: 60px;
-	font-size: 18px;
-}
+
 </style>

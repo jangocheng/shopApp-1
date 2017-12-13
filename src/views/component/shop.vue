@@ -8,7 +8,6 @@
   	<family></family>
   	<tuijian></tuijian>
   	<list></list>
-  <!--	<footer1></footer1>-->
   </div>
 </template>
 
@@ -22,7 +21,6 @@
 	 import family from '../shop/family.vue' 
 	 import tuijian from '../shop/tuijian.vue' 
 	 import list from '../shop/list.vue' 
-//	 import footer1 from '../shop/footer.vue' 
 		
 export default {
   name: 'app',
@@ -40,7 +38,6 @@ export default {
   	family:family,
   	tuijian:tuijian,
   	list:list
-//	footer1:footer1
   }
 }
 </script>

@@ -23,7 +23,6 @@ Vue.use(VueAwesomeSwiper)
 import Interface from './views/component/Interface.vue'
 import login from './views/component/login.vue'
 import enroll from './views/component/enroll.vue'
-import XiangQing from './views/component/XiangQing.vue'
 import password1 from './views/forgetPassword/password1.vue'
 import password2 from './views/forgetPassword/password2.vue'
 import password3 from './views/forgetPassword/password3.vue'
@@ -33,7 +32,11 @@ import shop from './views/component/shop.vue'
 import shopCar from './views/component/shopCar.vue'
 import product from './views/component/product.vue'
 import mySelf from './views/component/mySelf.vue'
-import pingjia from './views/pingjia/pingjia.vue'
+
+import XiangQing from './views/component/XiangQing.vue'
+import describe from './views/XiangQing/describe.vue'
+import pingjia from './views/XiangQing/pingjia.vue'
+import params from './views/XiangQing/params.vue'
 
 let vueRouter=new VueRouter({
 	mode:'history',
@@ -46,7 +49,14 @@ let vueRouter=new VueRouter({
 		{path:'/password2',component:password2},
 		{path:'/password3',component:password3},
 		
-		{path:'/XiangQing',component:XiangQing},
+		{path:'/XiangQing',component:XiangQing,
+			children:[
+				{path:'/',redirect:'describe'},
+				{path:'describe',component:describe},
+				{path:'pingjia',component:pingjia},
+				{path:'params',component:params}
+			]
+		},
 		{path:'/pingjia',component:pingjia},
 		{path:'/index',component:index,
 			children:[

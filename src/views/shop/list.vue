@@ -1,5 +1,5 @@
 <template>
-  <div class="list" style="margin-bottom: 60px;">
+  <div class="list">
   	<ul id="ul5">
   		<li v-for="data in arr" @click="XiangQing()">
   			<img :src="data.pic0" class="img"/>
