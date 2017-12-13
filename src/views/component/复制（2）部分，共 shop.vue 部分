@@ -1,0 +1,464 @@
+<template>
+	<div id="app">
+	<div class="header">
+  	<input type="text" placeholder="Q搜索你喜欢的商品、店铺"/>
+  	<img src="../assets/shop/inp-right.jpg" id="img2"/>
+  </div>
+	<div class="kong"></div>
+	
+	<div class="banner" >
+			<swiper :options="swiperOption" ref ='mySwiper'>
+				<swiper-slide v-for="data in obj.bannerList" :key="data.id"><img :src="data.imgpath"></swiper-slide>
+				<div class="swiper-pagination" slot="pagination"></div>
+			</swiper>
+    </div>
+    
+    <div id="new1">
+  	<ul>
+  		<li>
+  			<img src="../assets/shop/new1.jpg" class="img"/>
+  			<p>新品上架</p>
+  		</li>
+  		<li>
+  			<img src="../assets/shop/new2.jpg" class="img"/>
+  			<p>排毒养颜</p>
+  		</li>
+  		<li>
+  			<img src="../assets/shop/new3.jpg" class="img"/>
+  			<p>减肥塑形</p>
+  		</li>
+  		<li>
+  			<img src="../assets/shop/new4.jpg" class="img"/>
+  			<p>女士调理</p>
+  		</li>
+  		<li>
+  			<img src="../assets/shop/new5.jpg" class="img"/>
+  			<p>运动营养</p>
+  		</li>
+  		<li>
+  			<img src="../assets/shop/new6.jpg" class="img"/>
+  			<p>心血管健康</p>
+  		</li>
+  		<li>
+  			<img src="../assets/shop/new7.jpg" class="img"/>
+  			<p>男士健康</p>
+  		</li>
+  		<li>
+  			<img src="../assets/shop/new8.jpg" class="img"/>
+  			<p>精品套装</p>
+  		</li>
+  	</ul>
+  </div>
+		
+		<div class="week">
+			<div>
+				<p class="title"><span class="right">更多主打 ></span><span class="left1">本周主打</span></p>
+			</div>
+			<div class="col2">
+				<div v-for="data in obj.weekRecommend" :key="data.id" @click="XiangQing(data.id)">
+					<div>
+						<p class="name">{{data.goodsname}}</p>
+						<p class="weekcolor">{{data.description}}</p>
+					</div>
+					<div>
+						<img :src="data.pic0">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="month">
+			<div>
+				<p class="title"><span class="right">更多好货 ></span><span class="left2">本月主打</span></p>
+			</div>
+			<div  class="col2">
+				<div v-for="data in obj.monthRecommend" :key="data.id" @click="XiangQing(data.id)">
+					<div>
+						<p class="goodsname">{{data.goodsname}}</p>
+						<p class="gery">{{data.description}}</p>
+					</div>
+					<div>
+						<img :src="data.pic0">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="family" style="margin-bottom:0px;">
+			<div>
+				<p class="title"><span class="right">更多实惠 ></span><span class="left3">家庭套装</span></p>
+			</div>
+			<div  class="col3">
+				<div v-for="data in obj.homeRecommend" :key="data.id" @click="XiangQing(data.id)">
+					<p>{{data.goodsname}}</p>
+					<p><span class="blue" style="margin-right: 4px;">￥{{data.price}}</span><s class="gery">￥{{data.parameter}}</s></p>
+					<p><img :src="data.pic0"></p>
+				</div>
+			</div>
+		</div>
+
+		<div class="tuijian">
+		  	<ul class="ul">
+		  		<li><p class="li"></p></li>
+		  		<li>为您推荐</li>
+		  		<li><p class="li"></p></li>
+		  	</ul>
+		</div>
+
+		<div class="list" style="margin-bottom: 80px;">
+			<div v-for="data in obj.recommendList" :key="data.id" @click="XiangQing(data.id)">
+				<div><img :src="data.pic0"></div>
+				<div class="recontent">
+					<div class="reright">
+						<p class="newprice">￥{{data.price}}.00</p>
+						<p class="oldprice"><s>{{data.parameter}}</s></p>
+					</div>
+					<div>
+						<p>{{data.goodsname}}</p>
+						<p>{{data.description}}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<footer1></footer1>
+	 </div>
+</template>
+
+<script>
+	import { selectData } from '../api/shop'
+	import footer1 from './shop/footer.vue'
+export default {
+  data () {
+    return {
+      obj: {
+        bannerList: [],
+        monthRecommend: [],
+        homeRecommend: [],
+        recommendList: []
+      },
+      listQuery: {
+        page: 1,
+        limit: 10
+      },
+      swiperOption: {
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        },
+        autoplay: 1000
+      }
+    }
+  },
+  components:{
+  	footer1:footer1
+  },
+  created () {
+    selectData().then(res => {
+      console.log(res)
+      this.obj = res.data
+      for (const key in this.obj.bannerList) {
+        if (this.obj.bannerList[key].imgpath.substr(0, 4) !== 'http') {
+          this.obj.bannerList[key].imgpath = 'http://114.55.249.153:8028' + this.obj.bannerList[key].imgpath
+        }
+      }
+    })
+  },
+	methods: {
+	    XiangQing (id) {
+	      this.$router.push('/XiangQing/'+id)
+	    }
+	}
+}
+</script>
+<style scoped="scoped">* {
+	margin: 0;
+	padding: 0;
+}
+
+#app {
+	background: #F1F1F1;
+}
+
+.header {
+	width: 100%;
+	height: 60px;
+	/*70px*/
+	background: #CE3232;
+	position: fixed;
+	top: 0;
+	z-index: 100;
+}
+
+#img2 {
+	position: absolute;
+	top: 16px;
+	right: 2%;
+	width: 34px;
+	height: 32px;
+}
+
+input {
+	padding-left: 20px;
+	background: #a22828;
+	color: gainsboro;
+	width: 70%;
+	height: 36px;
+	margin-left: 13%;
+	margin-top: 16px;
+	border: 1px solid #CE3232;
+	border-radius: 6px;
+}
+
+.banner {
+	margin-top: 60px;
+}
+
+.banner .swiper-slide {
+	width: 100%;
+	height: 60vw;
+}
+
+.banner img {
+	width: 100%;
+	height: 100%;
+}
+
+#new1 {
+	background: white;
+	width: 100%;
+	padding: 8px 0;
+	height: 230px;
+	border-bottom: 1px solid #DDDDDD;
+}
+
+ul {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	padding-left: 0;
+}
+
+ul li {
+	margin-top: 10px;
+	text-align: center;
+	width: 25%;
+	list-style: none;
+}
+
+ul li img {
+	width: 60px;
+	height: 60px;
+}
+
+ul li p {
+	margin: 0;
+	padding-top: 2px;
+	color: gray;
+}
+
+.col2 {
+	background: white;
+	display: flex;
+	flex-wrap: wrap;
+	border-bottom: 1px solid #DDDDDD;
+}
+
+.col2>div {
+	box-sizing: border-box;
+	padding: 3%;
+	width: 50%;
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid #DDDDDD;
+}
+
+.col2>div:nth-child(2n+1) {
+	border-right: 1px solid #dddddd;
+}
+
+.col2>div>div:first-child {
+	width: 60%;
+	box-sizing: border-box;
+	padding-right: 3vw;
+}
+
+.col2>div>div:first-child p {
+	font-size: 14px;
+}
+
+.col2>div>div:last-child {
+	width: 40%;
+}
+
+.col2>div>div:last-child img {
+	width: 100%;
+}
+
+.title {
+	margin-top: 12px;
+	border-bottom: 1px solid #dddddd;
+	line-height: 36px;
+	background: white;
+}
+
+.title span {
+	padding: 0 2%;
+}
+
+.right {
+	margin-right: 3%;
+	float: right;
+	font-size: 12px;
+	color: #b5b5b5;
+}
+
+.left1 {
+	display: inline-block;
+	line-height: 36px;
+	border-bottom: 1px solid #CE3232;
+	font-size: 14px;
+	color: #ca3232;
+}
+
+.left2 {
+	display: inline-block;
+	line-height: 36px;
+	border-bottom: 1px solid #d24aff;
+	font-size: 14px;
+	color: #d24aff;
+}
+
+.left3 {
+	display: inline-block;
+	line-height: 36px;
+	border-bottom: 1px solid #009cff;
+	font-size: 14px;
+	color: #009cff;
+}
+
+.col3 {
+	width: 100%;
+	background: white;
+	display: flex;
+	border-bottom: 1px solid #DDDDDD;
+}
+
+.col3>div {
+	box-sizing: border-box;
+	flex: 1;
+	padding: 3%;
+	border-right: 1px solid #dddddd;
+}
+
+.col3>div:last-child {
+	border-right: none;
+}
+
+.col3>div p {
+	font-size: 14px;
+}
+
+.col3>div img {
+	width: 80%;
+	margin: 0 10%;
+}
+
+.tuijian {
+	width: 100%;
+	height: 30px;
+	padding: 0 8px;
+	margin-top: 6px;
+}
+
+.ul {
+	width: 100%;
+	display: flex;
+}
+
+.ul li {
+	color: dimgray;
+	list-style: none;
+	text-align: center;
+	height: 30px;
+}
+
+.ul li:nth-child(1) {
+	width: 38%;
+}
+
+.ul li:nth-child(2) {
+	width: 24%;
+}
+
+.ul li:nth-child(3) {
+	width: 38%;
+}
+
+.li {
+	margin-top: 10px;
+	width: 100%;
+	background: #DDDDDD;
+	height: 1px;
+}
+
+.list {
+	margin-top: 8px;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 10px 2% 0;
+	background: white;
+}
+
+.list img {
+	width: 100%;
+	height: 35vw;
+}
+
+.reright {
+	float: right;
+	margin-right: 2%;
+}
+
+.recontent {
+	padding: 5px 0;
+	padding-left: 2%;
+	min-height: 40px;
+}
+
+.newprice {
+	text-align: right;
+	color: red;
+	font-size: 16px;
+}
+
+.blue {
+	color: #009cff;
+	font-size: 10px;
+}
+
+.family .gery {
+	font-size: 10px;
+}
+
+.gery {
+	color: grey;
+	font-size: 10px;
+}
+
+.oldprice {
+	text-align: right;
+	color: grey;
+	font-size: 14px;
+}
+
+.weekcolor {
+	color: #ff8d23;
+	font-size: 10px;
+}
+
+.goodsname {
+	font-size: 10px;
+}
+
+</style>

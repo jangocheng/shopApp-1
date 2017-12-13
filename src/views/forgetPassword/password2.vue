@@ -2,7 +2,10 @@
   <div id="app">
   	<div id="header">
 			<router-link to='/password1'>
-					<p style="color: white;" id="back"> < 返回</p>
+					<p style="color: white;" id="back">
+						<img src="../../assets/img/back.png" id="png"/>
+						<span style="padding-left: 22px;">返回</span> 
+					</p>
 			</router-link>
 			<p id="top">找回密码</p>
 		</div>
@@ -10,15 +13,13 @@
 		<div id="center">
 			<p id="p1">短信验证码已发送，请输入验证码</p>
 			
-			<input type="text" placeholder="验证码" class="num"/>
+			<input type="text" placeholder="验证码" v-model.number="inpCode" class="num"/>
 			
 		</div>
 		
 		<div id="footer">
-			<router-link to="/password3">
-					<input type="button" id="btn1" value="下一步" />
-			</router-link>
-			<p id="p2">28’后重新发送</p>
+					<button id="btn1" @click="next()">下一步</button>
+		    	<p id="p2">28’后重新发送</p>
 		</div>
   </div>
 </template>
@@ -30,9 +31,22 @@ export default {
   name: 'app',
   data () {
     return {
-     
+     code:'',
+     inpCode:''
     }
-  }
+  },
+   created(){
+// 		this.code=localStorage.getItem('code')
+			this.code=this.$store.state.code
+
+   },
+  methods:{
+    	next(){
+    		if(this.inpCode===this.code){
+    			this.$router.push('/password3')
+    		}
+    	}
+    }
 }
 </script>
 
@@ -41,21 +55,27 @@ export default {
 	margin: 0;
 	padding: 0;
 }
+#png{
+	width: 20px;
+  height: 26px;
+  position: absolute;
+  margin: 0;
+}
 #header{
 	width: 100%;
-	height: 3.875rem;
+	height: 4.375rem;
 	background: #ca3232;
 	color: white;
 	position: relative;
 }
 #top{
 	text-align: center;
-  line-height: 4rem;
+  line-height: 5.6rem;
   font-size: 18px;
 }
 #back{
 	position: absolute;
-	margin-top: 20px;
+	margin-top: 30px;
 	left: 5%;
 	font-size: 16px;
 }
@@ -71,6 +91,7 @@ export default {
 	font-size: 20px;
 }
 .num{
+	outline: none;
 	margin-top: 26px;
 	width: 90%;
 	height: 50px;
